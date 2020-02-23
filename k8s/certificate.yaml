@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: smudgeserve-net-tls
+spec:
+  secretName: smudgeserve-net
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: smudgeserve.net
+  dnsNames:
+    - smudgeserve.net
+    - www.smudgeserve.net
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - smudgeserve.net
+          - www.smudgeserve.net
